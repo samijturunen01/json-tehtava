@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Pokemon haku</title>
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <!-- Oma CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Navigaatio -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Avaa navigaatio">
+
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              Etusivu (Tehtävä 1 OSA 1)
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="toteutus.html">
+              Tehtävä 1 OSA 2
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="pokemon.html">
+              Poke haku (Tehtävä 2 OSA 1 ja 2)
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="saa.html">
+              Tehtävä 3
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Sivun sisältö -->
+  <main class="container my-5">
+
+    <h1>Pokemon haku</h1>
+
+    <p>
+      <input
+        type="text"
+        id="pokemonName"
+        placeholder="Enter Pokemon name">
+
+      <button onclick="poke()">Hae</button>
+      <br>
+    </p>
+
+    <div id="nimi">
+      Kirjoita laatikkoon Pokemonin nimi
+    </div>
+
+    <p id="kuva2"></p>
+
+    <p id="kaannapainike"></p>
+
+    <div id="ominaisuudet"></div>
+
+    <h2>Pokemonien nimiä</h2>
+
+    <p>Jos et muista Pokemoneja ulkoa, tässä joitakin</p>
+
+    <ul>
+      <li>Mew</li>
+      <li>Eevee</li>
+      <li>Bulbasaur</li>
+      <li>Ivysaur</li>
+      <li>Venusaur</li>
+    </ul>
+
+  </main>
+
+  <!-- Bootstrap JavaScript -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+  <script>
+    let pokemonData;
+
+    function poke() {
+
+      const pokeName =
+        document.getElementById("pokemonName").value.toLowerCase();
+
+      fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+
+        .then(function(response) {
+          return response.json();
+        })
+
+        .then(function(responseJson) {
+          pokekuva(responseJson);
+        })
+
+        .catch(function(error) {
+          document.getElementById("nimi").innerHTML =
+            "<p>Tietoa ei pystytä hakemaan</p>";
+
+          document.getElementById("kuva2").innerHTML = "";
+          document.getElementById("kaannapainike").innerHTML = "";
+          document.getElementById("ominaisuudet").innerHTML = "";
+        });
+    }
+
+    function pokekuva(obj) {
+
+      pokemonData = obj;
+
+      let pokeurl = obj.sprites.front_default;
+
+      document.getElementById("kuva2").innerHTML =
+        "<img src=" + pokeurl + ">";
+
+      document.getElementById("nimi").innerHTML =
+        "<b>" + obj.name + "</b>";
+
+      // Lisätään Käännä-painike vasta haun jälkeen
+      document.getElementById("kaannapainike").innerHTML =
+        "<button onclick='kaanna()'>Käännä</button>";
+
+      // Tyhjennetään mahdolliset vanhat ominaisuudet
+      document.getElementById("ominaisuudet").innerHTML = "";
+
+      // Tyhjennetään hakukenttä
+      document.getElementById("pokemonName").value = "";
+    }
+
+    function kaanna() {
+
+      let takakuva = pokemonData.sprites.back_default;
+
+      document.getElementById("kuva2").innerHTML =
+        "<img src=" + takakuva + ">";
+
+      document.getElementById("ominaisuudet").innerHTML =
+        "<h3>Pokemonin ominaisuudet</h3>" +
+        "<p>Pituus: " + pokemonData.height + "</p>" +
+        "<p>Paino: " + pokemonData.weight + "</p>" +
+        "<p>Kokemuspisteet: " + pokemonData.base_experience + "</p>";
+    }
+  </script>
+
+</body>
+
+</html>
