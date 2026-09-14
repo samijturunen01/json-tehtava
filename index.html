@@ -46,15 +46,11 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="pokemon.html">Poke haku (Tehtävä 2 OSA 1)</a>
+            <a class="nav-link" href="pokemon.html">Poke haku (Tehtävä 2 OSA 1 ja 2)</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Poke haku (Tehtävä 2 OSA 2)</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">Tehtävä 3</a>
+            <a class="nav-link" href="saa.html">Tehtävä 3</a>
           </li>
 
         </ul>
@@ -75,71 +71,71 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
   </script>
 
-      <script>
-  fetch("tietue.json")
+  <script>
+    fetch("tietue.json")
 
-    // Muunnetaan vastaus JSON-muotoon
-    .then(function(response) {
-      return response.json();
-    })
+      // Muunnetaan vastaus JSON-muotoon
+      .then(function(response) {
+        return response.json();
+      })
 
-    // Käsitellään JSON-vastaus
-    .then(function(responseJson) {
-      kerro(responseJson);
-    })
+      // Käsitellään JSON-vastaus
+      .then(function(responseJson) {
+        kerro(responseJson);
+      })
 
-    // Jos tiedon hakemisessa tulee virhe
-    .catch(function(error) {
-      document.getElementById("vastaus").innerHTML =
-        "<p>Tietoa ei pystytä hakemaan</p>";
-    });
-</script>
+      // Jos tiedon hakemisessa tulee virhe
+      .catch(function(error) {
+        document.getElementById("vastaus").innerHTML =
+          "<p>Tietoa ei pystytä hakemaan</p>";
+      });
+  </script>
 
-<script>
-  function kerro(obj) {
+  <script>
+    function kerro(obj) {
 
-    // Haetaan otsikko ja kuvaus
-    let tiedot =
-      "<h1>" + obj.otsikko + "</h1>" +
-      "<br>" +
-      obj.kuvaus +
-      "<br><hr>";
+      // Haetaan otsikko ja kuvaus
+      let tiedot =
+        "<h1>" + obj.otsikko + "</h1>" +
+        "<br>" +
+        obj.kuvaus +
+        "<br><hr>";
 
-    // Lisätään kuva
-    tiedot +=
-      "<p><img src=" + obj.kuva + "></p>"
-
-    // Lisätään opintojakson tiedot
-    tiedot +=
-      "<h3>Opintojakso</h3>" +
-      "Nimi: " + obj.opintojakso.nimi + "<br>" +
-      "Tunnus: " + obj.opintojakso.tunnus + "<br>" +
-      "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>";
-
-    // Aiheet-otsikko
-    tiedot += "<h3>Aiheet</h3>";
-
-    tiedot += "<p>";
-
-    // Käydään tekniikat-taulukko läpi
-    for (var i = 0; i < obj.tekniikat.length; i++) {
-
+      // Lisätään kuva
       tiedot +=
-        "<b>Aihe: " + obj.tekniikat[i].aihe + "</b> ";
+        "<p><img src=" + obj.kuva + "></p>";
 
+      // Lisätään opintojakson tiedot
       tiedot +=
-        "<a href='" + obj.tekniikat[i].linkki + "'>" +
-        obj.tekniikat[i].linkki +
-        "</a><br>";
+        "<h3>Opintojakso</h3>" +
+        "Nimi: " + obj.opintojakso.nimi + "<br>" +
+        "Tunnus: " + obj.opintojakso.tunnus + "<br>" +
+        "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>";
+
+      // Aiheet-otsikko
+      tiedot += "<h3>Aiheet</h3>";
+
+      tiedot += "<p>";
+
+      // Käydään tekniikat-taulukko läpi
+      for (var i = 0; i < obj.tekniikat.length; i++) {
+
+        tiedot +=
+          "<b>Aihe: " + obj.tekniikat[i].aihe + "</b> ";
+
+        tiedot +=
+          "<a href='" + obj.tekniikat[i].linkki + "'>" +
+          obj.tekniikat[i].linkki +
+          "</a><br>";
+      }
+
+      tiedot += "</p>";
+
+      // Kirjoitetaan tiedot sivulle
+      document.getElementById("vastaus").innerHTML = tiedot;
+
     }
-
-    tiedot += "</p>";
-
-    // Kirjoitetaan tiedot sivulle
-    document.getElementById("vastaus").innerHTML = tiedot;
-
-  }
-</script>
+  </script>
 
 </body>
 
