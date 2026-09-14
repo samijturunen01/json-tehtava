@@ -46,15 +46,11 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Poke haku (Tehtävä 2 OSA 1)</a>
+            <a class="nav-link" href="pokemon.html">Poke haku (Tehtävä 2 OSA 1 ja 2)</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Poke haku (Tehtävä 2 OSA 2)</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">Tehtävä 3</a>
+            <a class="nav-link" href="saa.html">Tehtävä 3</a>
           </li>
 
         </ul>
@@ -92,31 +88,28 @@
           "<p>Tietoa ei pystytä hakemaan</p>";
       });
 
-function kerro(obj) {
+    function kerro(obj) {
 
-    let tiedot =
-      "<h1>" + obj.nimi + "</h1>" +
+      let tiedot =
+        "<h1>" + obj.nimi + "</h1>" +
+        "<p>" + obj.osallistujienLukumaara + " kpl</p>";
 
-      "<p>" + obj.osallistujienLukumaara + " kpl</p>";
+      tiedot += "<p>";
 
-    tiedot += "<p>";
+      for (var i = 0; i < obj.osallistujat.length; i++) {
+        tiedot += obj.osallistujat[i] + " ";
+      }
 
-    for (var i = 0; i < obj.osallistujat.length; i++) {
-      tiedot += obj.osallistujat[i] + " ";
+      tiedot += "</p>";
+
+      tiedot +=
+        "<p>" + obj.alkamisaika + " - " + obj.loppumisaika + "</p>" +
+        "<p>" + obj.kestoViikkoina + " viikkoa</p>" +
+        "<p><img src='" + obj.kuva +
+        "' alt='Digitekniikat' class='img-fluid'></p>";
+
+      document.getElementById("vastaus").innerHTML = tiedot;
     }
-
-    tiedot += "</p>";
-
-    tiedot +=
-      "<p>" + obj.alkamisaika + " - " + obj.loppumisaika + "</p>" +
-
-      "<p>" + obj.kestoViikkoina + " viikkoa</p>" +
-
-      "<p><img src='" + obj.kuva +
-      "' alt='Digitekniikat' class='img-fluid'></p>";
-
-    document.getElementById("vastaus").innerHTML = tiedot;
-  }
   </script>
 
 </body>
