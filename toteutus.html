@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Tehtävä 1 OSA 2</title>
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <!-- Oma CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Navigaatio -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Avaa navigaatio">
+
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Etusivu (Tehtävä 1 OSA 1)</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="toteutus.html">Tehtävä 1 OSA 2</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Poke haku (Tehtävä 2 OSA 1)</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Poke haku (Tehtävä 2 OSA 2)</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tehtävä 3</a>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Sivun sisältö -->
+  <main class="container my-5">
+    <div id="vastaus"></div>
+  </main>
+
+  <!-- Bootstrap JavaScript -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+  <script>
+    fetch("toteutus.json")
+
+      // Muunnetaan vastaus JSON-muotoon
+      .then(function(response) {
+        return response.json();
+      })
+
+      // Käsitellään JSON-vastaus
+      .then(function(responseJson) {
+        kerro(responseJson);
+      })
+
+      // Jos tiedon hakemisessa tulee virhe
+      .catch(function(error) {
+        document.getElementById("vastaus").innerHTML =
+          "<p>Tietoa ei pystytä hakemaan</p>";
+      });
+
+function kerro(obj) {
+
+    let tiedot =
+      "<h1>" + obj.nimi + "</h1>" +
+
+      "<p>" + obj.osallistujienLukumaara + " kpl</p>";
+
+    tiedot += "<p>";
+
+    for (var i = 0; i < obj.osallistujat.length; i++) {
+      tiedot += obj.osallistujat[i] + " ";
+    }
+
+    tiedot += "</p>";
+
+    tiedot +=
+      "<p>" + obj.alkamisaika + " - " + obj.loppumisaika + "</p>" +
+
+      "<p>" + obj.kestoViikkoina + " viikkoa</p>" +
+
+      "<p><img src='" + obj.kuva +
+      "' alt='Digitekniikat' class='img-fluid'></p>";
+
+    document.getElementById("vastaus").innerHTML = tiedot;
+  }
+  </script>
+
+</body>
+
+</html>

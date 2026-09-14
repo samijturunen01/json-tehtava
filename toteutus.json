@@ -1,0 +1,15 @@
+{
+  "nimi": "Digitekniikat",
+  "osallistujienLukumaara": 5,
+  "osallistujat": [
+    "Jaakko",
+    "Seppo",
+    "Liisa",
+    "Tiina",
+    "Kalle"
+  ],
+  "alkamisaika": "13.1.2025",
+  "loppumisaika": "14.3.2025",
+  "kestoViikkoina": 8,
+  "kuva": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80"
+}
